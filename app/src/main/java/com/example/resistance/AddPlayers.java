@@ -3,6 +3,8 @@ package com.example.resistance;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,6 +20,7 @@ public class AddPlayers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_players);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     /*
@@ -33,15 +36,20 @@ public class AddPlayers extends AppCompatActivity {
         EditText playerName = findViewById(R.id.playerName);
         if (playerName.getText().toString().compareTo("") == 0) { // if playerName is an empty string
             Toast.makeText(this, "Please, enter a name!", Toast.LENGTH_LONG).show();
+            playerName.setText("");
             playerName.setHint("PlayerName");
             return;
         }
-        else if (playersList.contains(playerName.getText().toString())) { // if playerName is repeated
+        else if (playersList.contains(playerName.getText().toString().trim())) { // if playerName is repeated
             Toast.makeText(this, "Please, enter a different name!\nProvided name already exists", Toast.LENGTH_SHORT).show();
+            playerName.setText("");
             playerName.setHint("PlayerName");
             return;
         }
-        playersList.add(playerName.getText().toString());
+        playersList.add(playerName.getText().toString().trim());
+
+        playerName.setText("");
+        playerName.setHint("PlayerName"); //This is needed to avoid user from manual erasing
         //////////////////////////////////////////////////////////////////////////
 
         // Let's display playersList
@@ -51,5 +59,24 @@ public class AddPlayers extends AppCompatActivity {
         listView.setAdapter(adapter);
         //////////////////////////////////////////////////////////////////////////
 
+    }
+
+    /*
+    * This is a playButton Callback
+    * We need to pass information from this activity to the next
+    *
+    * Also, handle cases when there are too little/many players
+    *
+    * ??? How to remove players? ???
+    * */
+    public void playButtonClick(View view) {
+        if (playersList.size() < 5) {
+            Toast.makeText(this, "Add more players to proceed!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if (playersList.size() > 9) {
+            Toast.makeText(this, "Too many players!", Toast.LENGTH_SHORT).show();
+            return;
+        }
     }
 }
