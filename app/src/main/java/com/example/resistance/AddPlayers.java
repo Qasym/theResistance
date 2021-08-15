@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -46,6 +47,12 @@ public class AddPlayers extends AppCompatActivity {
             playerName.setHint("PlayerName");
             return;
         }
+        else if (playersList.size() == 9) { // if maximum # of players is reached
+            Toast.makeText(this, "Maximum player limit reached!", Toast.LENGTH_LONG).show();
+            playerName.setText("");
+            playerName.setHint("PlayerName");
+            return;
+        }
         playersList.add(playerName.getText().toString().trim());
 
         playerName.setText("");
@@ -59,24 +66,32 @@ public class AddPlayers extends AppCompatActivity {
         listView.setAdapter(adapter);
         //////////////////////////////////////////////////////////////////////////
 
+        // Let's make players removable, for now we just need to click on them
+        //////////////////////////////////////////////////////////////////////////
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                playersList.remove(position); // removes the player on position
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(AddPlayers.this, android.R.layout.simple_list_item_1, playersList);
+                listView.setAdapter(adapter);
+            }
+        });
+        //////////////////////////////////////////////////////////////////////////
+
     }
 
     /*
     * This is a playButton Callback
     * We need to pass information from this activity to the next
     *
-    * Also, handle cases when there are too little/many players
     *
-    * ??? How to remove players? ???
     * */
     public void playButtonClick(View view) {
         if (playersList.size() < 5) {
             Toast.makeText(this, "Add more players to proceed!", Toast.LENGTH_SHORT).show();
             return;
         }
-        else if (playersList.size() > 9) {
-            Toast.makeText(this, "Too many players!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
     }
 }
