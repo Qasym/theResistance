@@ -19,4 +19,15 @@
         app:layout_constraintVertical_bias="0.442"
         android:onClick="playButtonClick"
         />
+
+    <Button
+        android:id="@+id/rulesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rules"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playButton"
+        android:onClick="rulesButtonClick"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Resistance">
         <activity
+            android:name=".DisplayRules"
+            android:exported="true" />
+        <activity
             android:name=".AddPlayers"
             android:exported="true" />
         <activity android:name=".MainActivity">

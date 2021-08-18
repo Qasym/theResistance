@@ -48,7 +48,7 @@ public class AddPlayers extends AppCompatActivity {
             return;
         }
         else if (playersList.size() == 9) { // if maximum # of players is reached
-            Toast.makeText(this, "Maximum player limit reached!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Maximum players limit reached!", Toast.LENGTH_LONG).show();
             playerName.setText("");
             playerName.setHint("PlayerName");
             return;
