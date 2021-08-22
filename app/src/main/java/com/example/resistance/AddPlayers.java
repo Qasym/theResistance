@@ -90,7 +90,6 @@ public class AddPlayers extends AppCompatActivity {
     public void playButtonClick(View view) {
         if (playersList.size() < 5) {
             Toast.makeText(this, "Add more players to proceed!", Toast.LENGTH_SHORT).show();
-            return;
         }
 
     }

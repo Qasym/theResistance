@@ -21,6 +21,7 @@ public class DisplayRules extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.rulesActionBar);
         setSupportActionBar(toolbar); // This shows toolbar
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true); // This shows "back-button" in the toolbar
         //////////////////////////////////////////////////////////////////////////
     }
