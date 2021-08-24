@@ -1,10 +1,11 @@
 package com.example.resistance;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-public class GameEngine {
+public class GameEngine implements Serializable {
     public final ArrayList<String> players, spies, resistance;
 
     public GameEngine(ArrayList<String> list) {
@@ -12,6 +13,10 @@ public class GameEngine {
         this.spies = new ArrayList<String>();
         this.resistance = new ArrayList<String>();
         setRoles();
+    }
+
+    public ArrayList<String> getPlayers() {
+        return players;
     }
 
     public ArrayList<String> getSpies() {
