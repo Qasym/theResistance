@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Resistance">
         <activity
+            android:name=".ShowRoles"
+            android:exported="true" />
+        <activity
             android:name=".DisplayRules"
             android:exported="true" />
         <activity

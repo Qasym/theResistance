@@ -2,6 +2,7 @@ package com.example.resistance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -11,17 +12,18 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AddPlayers extends AppCompatActivity {
 
-    public final LinkedList<String> playersList = new LinkedList<>(); // List of all entered players
+    public final ArrayList<String> playersList = new ArrayList<>(); // List of all entered players
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_players);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); //this is needed for editText to appear on top of the keyboard while typing
     }
 
     /*
@@ -71,7 +73,7 @@ public class AddPlayers extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                playersList.remove(position); // removes the player on position
+                playersList.remove(position); // removes the player on position "position"
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(AddPlayers.this, android.R.layout.simple_list_item_1, playersList);
                 listView.setAdapter(adapter);
@@ -91,6 +93,11 @@ public class AddPlayers extends AppCompatActivity {
         if (playersList.size() < 5) {
             Toast.makeText(this, "Add more players to proceed!", Toast.LENGTH_SHORT).show();
         }
-
+        else {
+            Intent intent = new Intent(AddPlayers.this, ShowRoles.class);
+            intent.putStringArrayListExtra("players", playersList); //in order to pass playersList to ShowRoles activity
+            startActivity(intent);
+            finish();
+        }
     }
 }
