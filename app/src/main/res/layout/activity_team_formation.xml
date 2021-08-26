@@ -8,58 +8,64 @@
 
     <ListView
         android:id="@+id/all_players"
-        android:layout_width="336dp"
-        android:layout_height="251dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp"
+        android:layout_width="0dp"
+        android:layout_height="310dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/announcer" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/verticalGuideline"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/announcer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Captain announcer"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/verticalGuideline"
+        app:layout_constraintBottom_toTopOf="@+id/all_players"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"/>
 
     <ListView
         android:id="@+id/selected_players"
-        android:layout_width="336dp"
-        android:layout_height="188dp"
-        app:layout_constraintTop_toBottomOf="@+id/teamviewer"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="310dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="317dp" />
+        app:layout_constraintLeft_toLeftOf="@id/verticalGuideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/teamviewer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Team for the round"
-        app:layout_constraintTop_toBottomOf="@+id/all_players"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="298dp" />
+        app:layout_constraintLeft_toRightOf="@+id/verticalGuideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/selected_players"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"/>
 
     <Button
         android:id="@+id/propose_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="proposeButtonClick"
         android:text="Propose"
-        app:layout_constraintTop_toBottomOf="@+id/selected_players"
-        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="505dp"
-        android:onClick="proposeButtonClick"/>
+        app:layout_constraintTop_toBottomOf="@+id/selected_players"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
