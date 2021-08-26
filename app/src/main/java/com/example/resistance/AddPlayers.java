@@ -35,7 +35,6 @@ public class AddPlayers extends AppCompatActivity {
     * */
     public void addButtonClick(android.view.View view) {
         // Let's handle and add playerName
-        //////////////////////////////////////////////////////////////////////////
         EditText playerName = findViewById(R.id.playerName);
         if (playerName.getText().toString().compareTo("") == 0) { // if playerName is an empty string
             Toast.makeText(this, "Please, enter a name!", Toast.LENGTH_LONG).show();
@@ -57,19 +56,18 @@ public class AddPlayers extends AppCompatActivity {
         }
         playersList.add(playerName.getText().toString().trim());
 
+
         playerName.setText("");
         playerName.setHint("PlayerName"); //This is needed to avoid user from manual erasing
-        //////////////////////////////////////////////////////////////////////////
+
 
         // Let's display playersList
-        //////////////////////////////////////////////////////////////////////////
         ListView listView = findViewById(R.id.playersListView);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, playersList);
         listView.setAdapter(adapter);
-        //////////////////////////////////////////////////////////////////////////
+
 
         // Let's make players removable, for now we just need to click on them
-        //////////////////////////////////////////////////////////////////////////
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -79,7 +77,6 @@ public class AddPlayers extends AppCompatActivity {
                 listView.setAdapter(adapter);
             }
         });
-        //////////////////////////////////////////////////////////////////////////
 
     }
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class GameEngineTest extends TestCase {
     @Test
-    public void test_setRoles(){
+    public void setRoles(){
         ArrayList<String> list = new ArrayList<>();
         list.add("1");
         list.add("2");
@@ -27,4 +27,25 @@ public class GameEngineTest extends TestCase {
             assertFalse(game.spies.contains(member)); //make sure spies contain no resistance
         }
     }
+
+    @Test
+    public void getNextCaptain() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        GameEngine game = new GameEngine(list);
+
+        for (int i = 0; i < 5; i++) {
+            try {
+                game.getNextCaptain();
+            }
+            except (Exception e) {
+                assertTrue(false);
+            }
+        }
+    }
+
 }

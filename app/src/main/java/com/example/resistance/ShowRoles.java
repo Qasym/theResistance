@@ -18,10 +18,10 @@ public class ShowRoles extends AppCompatActivity {
     TextView passRole; // our TextView, it shows the "pass phone to name1" and the role, hence the name
     Button iGotIt; // button, it changes its text to "I am name1" and "Got it", hence the name
     boolean showingRole = false; // initially it is false, since initially it doesn't show any role
-    int currentIndex = 0;
-    String currentPlayer;
+    int currentIndex = 0; //index of the current player
+    String currentPlayer; //current player, intuitive
 
-    GameEngine gameEngine;
+    GameEngine gameEngine; //game engine where everything is stored
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class ShowRoles extends AppCompatActivity {
             if (currentIndex == gameEngine.getPlayers().size()) {
                 // We will change this soon, it will go to the next activity
                 // not to the MainActivity;
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, TeamFormation.class);
                 intent.putExtra("gameEngine", gameEngine);
                 startActivity(intent);
                 finish();
