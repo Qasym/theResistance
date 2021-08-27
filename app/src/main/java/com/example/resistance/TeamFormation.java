@@ -19,7 +19,7 @@ public class TeamFormation extends AppCompatActivity {
     ListView allPlayersView, selectedPlayersView;
     Button proposeButton;
     TextView announcer, teamviewer;
-    GameEngine gameEngine = (GameEngine) getIntent().getSerializableExtra("gameEngine");
+    GameEngine gameEngine;
     ArrayList<String> allPlayersList, selectedPlayersList;
     ArrayAdapter<String> allPlayersAdapter, selectedPlayersAdapter;
 
@@ -29,6 +29,7 @@ public class TeamFormation extends AppCompatActivity {
         setContentView(R.layout.activity_team_formation);
 
         //initializing variables
+        gameEngine = (GameEngine) getIntent().getSerializableExtra("gameEngine");
         allPlayersView = findViewById(R.id.all_players);
         selectedPlayersView = findViewById(R.id.selected_players);
         proposeButton = findViewById(R.id.propose_button);
@@ -36,7 +37,7 @@ public class TeamFormation extends AppCompatActivity {
         allPlayersList = gameEngine.getPlayersCopy();
         selectedPlayersList = new ArrayList<>();
         teamviewer = findViewById(R.id.teamviewer);
-        
+
         // Displaying captain and showing player limit
         announcer.setText(String.format("%s is the captain", gameEngine.getNextCaptain()));
         teamviewer.setText(String.format("Select %d players for your team", gameEngine.getCurrentRoundLimit()));
@@ -94,6 +95,6 @@ public class TeamFormation extends AppCompatActivity {
     * This method will simply start different activity
     * */
     public void proposeButtonClick(View view) {
-        
+        Toast.makeText(this, "Button pressed", Toast.LENGTH_SHORT).show();
     }
 }

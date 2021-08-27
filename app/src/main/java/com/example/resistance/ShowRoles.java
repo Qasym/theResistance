@@ -8,9 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 @SuppressLint("SetTextI18n")
 public class ShowRoles extends AppCompatActivity {
@@ -37,6 +36,7 @@ public class ShowRoles extends AppCompatActivity {
         currentPlayer = gameEngine.getPlayers().get(currentIndex);
         passRole.setText("Pass phone to " + currentPlayer);
         iGotIt.setText("I am " + currentPlayer);
+        currentIndex++;
     }
 
     /*
@@ -52,19 +52,19 @@ public class ShowRoles extends AppCompatActivity {
         if (showingRole) { //if this activity is showing the role
             showingRole = false;
 
-            if (currentIndex == gameEngine.getPlayers().size()) {
+            if (currentIndex < gameEngine.getPlayers().size()) {
+                currentPlayer = gameEngine.getPlayers().get(currentIndex);
+                passRole.setText("Please pass phone to " + currentPlayer);
+                iGotIt.setText("I am " + currentPlayer);
+                currentIndex++;
+            }
+            else {
                 // We will change this soon, it will go to the next activity
-                // not to the MainActivity;
-                Intent intent = new Intent(this, TeamFormation.class);
+                Intent intent = new Intent(ShowRoles.this, TeamFormation.class);
                 intent.putExtra("gameEngine", gameEngine);
                 startActivity(intent);
                 finish();
             }
-
-            currentPlayer = gameEngine.getPlayers().get(++currentIndex);
-
-            passRole.setText("Please pass phone to " + currentPlayer);
-            iGotIt.setText("I am " + currentPlayer);
         }
         else { //if this activity is not showing the role, *this is executed first*
             showingRole = true;

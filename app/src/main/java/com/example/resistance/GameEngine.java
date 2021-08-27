@@ -35,9 +35,7 @@ public class GameEngine implements Serializable {
     }
     
     public ArrayList<String> getPlayersCopy() {
-        ArrayList<String> copy = new ArrayList<>();
-        Collections.copy(copy, players);
-        return copy;
+        return new ArrayList<>(this.players);
     }
 
     public ArrayList<String> getPlayers() {
