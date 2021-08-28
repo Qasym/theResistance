@@ -3,6 +3,7 @@ package com.example.resistance;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,7 @@ public class TeamFormation extends AppCompatActivity {
     GameEngine gameEngine;
     ArrayList<String> allPlayersList, selectedPlayersList;
     ArrayAdapter<String> allPlayersAdapter, selectedPlayersAdapter;
+    String captain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +40,15 @@ public class TeamFormation extends AppCompatActivity {
         selectedPlayersList = new ArrayList<>();
         teamviewer = findViewById(R.id.teamviewer);
 
+        // Toast message announcement
+        Toast.makeText(this, String.format("Round %d", gameEngine.getCurrentRound()), Toast.LENGTH_LONG).show();
+
         // Displaying captain and showing player limit
-        announcer.setText(String.format("%s is the captain", gameEngine.getNextCaptain()));
+        captain = gameEngine.getNextCaptain();
+        announcer.setText(String.format("%s is the captain", captain));
         teamviewer.setText(String.format("Select %d players for your team", gameEngine.getCurrentRoundLimit()));
 
         // Setting up a rounds history (who won each round)
-
         // Yet to be implemented
 
         //displaying all players in all_players listview
@@ -95,6 +100,18 @@ public class TeamFormation extends AppCompatActivity {
     * This method will simply start different activity
     * */
     public void proposeButtonClick(View view) {
-        Toast.makeText(this, "Button pressed", Toast.LENGTH_SHORT).show();
+        if (selectedPlayersList.size() == gameEngine.getCurrentRoundLimit()) {
+            Intent intent = new Intent(TeamFormation.this, TeamConfirmation.class);
+            intent.putExtra("gameEngine", gameEngine);
+            intent.putStringArrayListExtra("selectedPlayers", selectedPlayersList);
+            intent.putExtra("captain", captain);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            Toast.makeText(this, String.format("Please, select %d players", gameEngine.getCurrentRoundLimit()), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
     }
 }

@@ -44,6 +44,12 @@ public class GameEngineTest extends TestCase {
             assertEquals(game.getCaptainList().get(2), game.getNextCaptain());
             assertEquals(game.getCaptainList().get(3), game.getNextCaptain());
             assertEquals(game.getCaptainList().get(4), game.getNextCaptain());
+
+            assertEquals(game.getCaptainList().get(0), game.getNextCaptain());
+            assertEquals(game.getCaptainList().get(1), game.getNextCaptain());
+            assertEquals(game.getCaptainList().get(2), game.getNextCaptain());
+            assertEquals(game.getCaptainList().get(3), game.getNextCaptain());
+            assertEquals(game.getCaptainList().get(4), game.getNextCaptain());
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

@@ -9,15 +9,21 @@ import java.util.Date;
 import java.util.Random;
 
 public class GameEngine implements Serializable {
-    public final ArrayList<String> players, spies, resistance, captainList;
-    int captainIndex = 0;
-    int currentRound = 0;
+    final ArrayList<String> players, spies, resistance, captainList;
+    ArrayList<String> roundGoers;
+    boolean[] roundVotes;
+    char[] history = new char[5];
+    int captainIndex = 0, currentRound = 0, captainSwitches = 0; //captain switches is the count of how many times captain switched (5 times and spies win the round)
     int[] roundsDistribution = new int[5];
 
     public GameEngine(@NonNull ArrayList<String> list) {
         this.players = list;
-        this.spies = new ArrayList<String>();
-        this.resistance = new ArrayList<String>();
+        this.spies = new ArrayList<>();
+        this.resistance = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            history[i] = 'n';
+        }
 
         setRoles();
 
@@ -33,7 +39,19 @@ public class GameEngine implements Serializable {
         }
         return captainList.get(captainIndex++);
     }
-    
+
+    public int getCurrentRound() {
+        return currentRound;
+    }
+
+    public void nextRound() {
+        currentRound++;
+    }
+
+    public int getCurrentRoundLimit() {
+        return roundsDistribution[currentRound];
+    }
+
     public ArrayList<String> getPlayersCopy() {
         return new ArrayList<>(this.players);
     }
@@ -54,6 +72,11 @@ public class GameEngine implements Serializable {
         return captainList;
     }
 
+    public void setRoundGoers(@NonNull ArrayList<String> roundGoers) {
+        this.roundGoers = roundGoers;
+        roundVotes = new boolean[roundGoers.size()];
+    }
+
     /*
     * This method simply assigns roles to each player
     * */
@@ -63,28 +86,16 @@ public class GameEngine implements Serializable {
         String name;
         while (i < numberOfSpies) {
             name = this.players.get(random.nextInt(players.size()));
-            if (!this.spies.contains(name)) { //if it's not repeated
+            if (!this.spies.contains(name)) { //if name's not repeated
                 this.spies.add(name);
                 i++;
             }
         }
         for (String player : players) {
-            if (!this.spies.contains(player)) { //if players is not spy
+            if (!this.spies.contains(player)) { //if player is not spy
                 this.resistance.add(player);
             }
         }
-    }
-
-    public int getCurrentRound() {
-        return currentRound;
-    }
-
-    public void nextRound() {
-        currentRound++;
-    }
-
-    public int getCurrentRoundLimit() {
-        return roundsDistribution[currentRound];
     }
 
     /*
@@ -135,5 +146,29 @@ public class GameEngine implements Serializable {
             roundsDistribution[4] = 5;
         }
         return spies;
+    }
+
+    public void captainSwitched() {
+        if (captainSwitches == 5) {
+            //round is after spies;
+            nextRound();
+
+            //todo:implement this method
+            //need to update history
+            //yet to be implemented
+        }
+        else captainSwitches++;
+    }
+
+    public void resetSwitches() {
+        captainSwitches = 0;
+    }
+
+    /*
+    * Calculates who won the round
+    * based on votes
+    * */
+    public void calculateResult() {
+        //todo: implement this method
     }
 }

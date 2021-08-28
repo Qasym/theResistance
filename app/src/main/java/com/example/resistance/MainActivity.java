@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playButtonClick(View view) {
-        Toast.makeText(this, "Play Button clicked!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, AddPlayers.class);
         startActivity(intent);
         finish();
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     public void rulesButtonClick(View view) {
         Intent intent = new Intent(this, DisplayRules.class);
         startActivity(intent);
-
     }
 
 }
