@@ -40,6 +40,15 @@ public class TeamFormation extends AppCompatActivity {
         selectedPlayersList = new ArrayList<>();
         teamviewer = findViewById(R.id.teamviewer);
 
+        // Check if anyone won the game
+        if (gameEngine.anyWinner()) {
+            Intent intent = new Intent(this, Final.class);
+            intent.putExtra("gameEngine", gameEngine);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         // Toast message announcement
         Toast.makeText(this, String.format("Round %d", gameEngine.getCurrentRound() + 1), Toast.LENGTH_LONG).show();
 
@@ -49,8 +58,7 @@ public class TeamFormation extends AppCompatActivity {
         teamviewer.setText(String.format("Select %d players for your team", gameEngine.getCurrentRoundLimit()));
 
         // Setting up a rounds history (who won each round)
-        // todo: Implement Round history
-        // Yet to be implemented
+        roundHistorySetup();
 
         //displaying all players in all_players listview
         allPlayersAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allPlayersList);
@@ -111,8 +119,45 @@ public class TeamFormation extends AppCompatActivity {
         }
         else {
             Toast.makeText(this, String.format("Please, select %d players", gameEngine.getCurrentRoundLimit()), Toast.LENGTH_SHORT).show();
-            return;
         }
+    }
 
+    private void roundHistorySetup() {
+        TextView roundTextView = null;
+        for (int i = 0; i < gameEngine.history.length; i++) {
+            switch (i) {
+                case 0:
+                    roundTextView = findViewById(R.id.round_one);
+                    break;
+                case 1:
+                    roundTextView = findViewById(R.id.round_two);
+                    break;
+                case 2:
+                    roundTextView = findViewById(R.id.round_three);
+                    break;
+                case 3:
+                    roundTextView = findViewById(R.id.round_four);
+                    break;
+                case 4:
+                    roundTextView = findViewById(R.id.round_five);
+                    break;
+                default:
+                    break;
+            }
+            switch (gameEngine.history[i]) {
+                case 's':
+                    roundTextView.setText(String.format("Round %d\nSpies", i + 1));
+                    break;
+                case 'r':
+                    roundTextView.setText(String.format("Round %d\nResistance", i + 1));
+                    break;
+                default:
+                    roundTextView.setText(String.format("Round %d", i + 1));
+                    break;
+            }
+            if (gameEngine.getCurrentRound() == i) {
+                roundTextView.setText(String.format("Round %d\nCurrent", i));
+            }
+        }
     }
 }

@@ -98,6 +98,25 @@ public class GameEngine implements Serializable {
         }
     }
 
+    public boolean anyWinner() {
+        int r = 0, s = 0; //resistance, spies
+        for (char c : history) {
+            if (c == 'r') r++;
+            else if (c == 's') s++;
+        }
+        return r >= 3 || s >= 3;
+    }
+
+    public String whoWon() {
+        int r = 0, s = 0; //resistance, spies
+        for (char c : history) {
+            if (c == 'r') r++;
+            else if (c == 's') s++;
+        }
+        if (r >= 3) return "Spies";
+        else return "Resistance";
+    }
+
     /*
     * 5-6 players = 2 spies
     * 7-9 players = 3 spies
@@ -151,6 +170,7 @@ public class GameEngine implements Serializable {
     public void captainSwitched() {
         if (captainSwitches == 5) {
             //round is after spies;
+            history[getCurrentRound()] = 's';
             nextRound();
         }
         else captainSwitches++;
