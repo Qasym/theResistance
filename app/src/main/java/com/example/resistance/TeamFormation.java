@@ -41,7 +41,7 @@ public class TeamFormation extends AppCompatActivity {
         teamviewer = findViewById(R.id.teamviewer);
 
         // Toast message announcement
-        Toast.makeText(this, String.format("Round %d", gameEngine.getCurrentRound()), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, String.format("Round %d", gameEngine.getCurrentRound() + 1), Toast.LENGTH_LONG).show();
 
         // Displaying captain and showing player limit
         captain = gameEngine.getNextCaptain();
@@ -49,6 +49,7 @@ public class TeamFormation extends AppCompatActivity {
         teamviewer.setText(String.format("Select %d players for your team", gameEngine.getCurrentRoundLimit()));
 
         // Setting up a rounds history (who won each round)
+        // todo: Implement Round history
         // Yet to be implemented
 
         //displaying all players in all_players listview

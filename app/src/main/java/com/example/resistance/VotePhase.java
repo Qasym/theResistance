@@ -3,6 +3,7 @@ package com.example.resistance;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,6 @@ public class VotePhase extends AppCompatActivity {
     TextView passVote;
     GameEngine gameEngine;
     int playerIndex;
-    boolean isSpy;
 
     @Override
     // This method is executed only once, further we just change visibility, do not restart this activity
@@ -55,7 +55,6 @@ public class VotePhase extends AppCompatActivity {
         if (gameEngine.getResistance().contains(gameEngine.roundGoers.get(playerIndex))) { //if the current player is part of the Resistance
             failButton.setText("Pass");
             passButton.setText("Pass");
-            isSpy = false;
         }
         else {
             // Below code is to make buttons appear randomly
@@ -68,7 +67,6 @@ public class VotePhase extends AppCompatActivity {
                 failButton.setText("Pass");
                 passButton.setText("Fail");
             }
-            isSpy = true;
         }
 
         // Changing the visibility
@@ -82,52 +80,60 @@ public class VotePhase extends AppCompatActivity {
     * Closely related to each other
     * */
     public void failButtonClick(View view) {
-        if (!isSpy) { //if the player is not spy, we direct him/her to passButtonClick
-            passButtonClick(view);
-        }
+        if (failButton.getText().toString().compareTo("Fail") == 0) {
+            // Counting vote
+            gameEngine.roundVotes[playerIndex] = false;
+            playerIndex++;
 
-        // Counting vote
-        gameEngine.roundVotes[playerIndex] = false;
-        playerIndex++;
+            if (playerIndex < gameEngine.roundVotes.length) {
+                //Setting up the text
+                passVote.setText(String.format("Pass phone to %s", gameEngine.roundGoers.get(playerIndex)));
+                iAmButton.setText(String.format("I am %s", gameEngine.roundGoers.get(playerIndex)));
 
-
-        if (playerIndex < gameEngine.roundVotes.length) {
-            //Setting up the text
-            passVote.setText(String.format("Pass phone to %s", gameEngine.roundGoers.get(playerIndex)));
-            iAmButton.setText(String.format("I am %s", gameEngine.roundGoers.get(playerIndex)));
-
-            // Changing visibility
-            iAmButton.setVisibility(View.VISIBLE);
-            passButton.setVisibility(View.GONE);
-            failButton.setVisibility(View.GONE);
+                // Changing visibility
+                iAmButton.setVisibility(View.VISIBLE);
+                passButton.setVisibility(View.GONE);
+                failButton.setVisibility(View.GONE);
+            }
+            else {
+                Intent intent = new Intent(this, ShowResults.class);
+                intent.putExtra("gameEngine", gameEngine);
+                startActivity(intent);
+                finish();
+            }
         }
         else {
-            Toast.makeText(this, "Next Activity!", Toast.LENGTH_SHORT).show();
+            passButton.setText("Pass");
+            passButtonClick(view);
         }
     }
 
     public void passButtonClick(View view) {
-        if (isSpy) { //if the player is spy, we direct him/her to failButtonClick
-            failButtonClick(view);
-        }
+        if (passButton.getText().toString().compareTo("Pass") == 0) {
+            // Counting vote
+            gameEngine.roundVotes[playerIndex] = true;
+            playerIndex++;
 
-        // Counting vote
-        gameEngine.roundVotes[playerIndex] = true;
-        playerIndex++;
+            if (playerIndex < gameEngine.roundVotes.length) {
+                //Setting up the text
+                passVote.setText(String.format("Pass phone to %s", gameEngine.roundGoers.get(playerIndex)));
+                iAmButton.setText(String.format("I am %s", gameEngine.roundGoers.get(playerIndex)));
 
-
-        if (playerIndex < gameEngine.roundVotes.length) {
-            //Setting up the text
-            passVote.setText(String.format("Pass phone to %s", gameEngine.roundGoers.get(playerIndex)));
-            iAmButton.setText(String.format("I am %s", gameEngine.roundGoers.get(playerIndex)));
-
-            // Changing visibility
-            iAmButton.setVisibility(View.VISIBLE);
-            passButton.setVisibility(View.GONE);
-            failButton.setVisibility(View.GONE);
+                // Changing visibility
+                iAmButton.setVisibility(View.VISIBLE);
+                passButton.setVisibility(View.GONE);
+                failButton.setVisibility(View.GONE);
+            }
+            else {
+                Intent intent = new Intent(this, ShowResults.class);
+                intent.putExtra("gameEngine", gameEngine);
+                startActivity(intent);
+                finish();
+            }
         }
         else {
-            Toast.makeText(this, "Next Activity!", Toast.LENGTH_SHORT).show();
+            failButton.setText("Fail");
+            failButtonClick(view);
         }
     }
 }

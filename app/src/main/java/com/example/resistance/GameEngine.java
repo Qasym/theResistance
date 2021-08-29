@@ -22,7 +22,7 @@ public class GameEngine implements Serializable {
         this.resistance = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
-            history[i] = 'n';
+            history[i] = 'n'; //stands for none (or no one), indicating that no one won the round yet
         }
 
         setRoles();
@@ -82,7 +82,7 @@ public class GameEngine implements Serializable {
     * */
     private void setRoles() {
         Random random = new Random(new Date().getTime()); // setting current time as a seed
-        int i = 0, numberOfSpies = setRoundsGetSpies(players.size());
+        int i = 0, numberOfSpies = setRoundsGetSpies();
         String name;
         while (i < numberOfSpies) {
             name = this.players.get(random.nextInt(players.size()));
@@ -103,7 +103,7 @@ public class GameEngine implements Serializable {
     * 7-9 players = 3 spies
     * 10 players = 4 spies
     * */
-    private int setRoundsGetSpies(int size) {
+    private int setRoundsGetSpies() {
         int spies;
         if (players.size() == 5) {
             spies = 2;
@@ -152,10 +152,6 @@ public class GameEngine implements Serializable {
         if (captainSwitches == 5) {
             //round is after spies;
             nextRound();
-
-            //todo:implement this method
-            //need to update history
-            //yet to be implemented
         }
         else captainSwitches++;
     }
@@ -168,7 +164,32 @@ public class GameEngine implements Serializable {
     * Calculates who won the round
     * based on votes
     * */
-    public void calculateResult() {
-        //todo: implement this method
+    public int calculateResult() {
+        int fails = 0;
+        for (boolean roundVote : roundVotes) {
+            if (!roundVote) fails++; // if roundVotes[i] is false, we increment fails
+        }
+
+        if (fails == 0) resistanceWonTheRound();
+        else {
+            if (players.size() >= 7) {
+                if (currentRound == 4) {
+                    if (fails >= 2) spiesWonTheRound();
+                    else resistanceWonTheRound();
+                }
+                else spiesWonTheRound();
+            }
+            else spiesWonTheRound();
+        }
+
+        return fails;
+    }
+
+    private void spiesWonTheRound() {
+        history[currentRound] = 's'; //indicates that spies won the round
+    }
+
+    private void resistanceWonTheRound() {
+        history[currentRound] = 'r'; //indicates that resistance won the round
     }
 }
