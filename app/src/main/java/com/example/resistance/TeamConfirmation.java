@@ -45,7 +45,10 @@ public class TeamConfirmation extends AppCompatActivity {
         gameEngine.nextRound(); //updating the round
         gameEngine.resetSwitches(); //resetting captainSwitches to zero
         gameEngine.setRoundGoers(roundGoers);
-        Toast.makeText(this, "Next Activity", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, VotePhase.class);
+        intent.putExtra("gameEngine", gameEngine);
+        startActivity(intent);
+        finish();
     }
 
     /*

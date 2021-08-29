@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Resistance">
         <activity
+            android:name=".VotePhase"
+            android:exported="true" />
+        <activity
             android:name=".TeamConfirmation"
             android:exported="true" />
         <activity

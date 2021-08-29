@@ -10,11 +10,11 @@ import java.util.Random;
 
 public class GameEngine implements Serializable {
     final ArrayList<String> players, spies, resistance, captainList;
-    ArrayList<String> roundGoers;
-    boolean[] roundVotes;
-    char[] history = new char[5];
+    ArrayList<String> roundGoers; //list containing players who about to vote
+    boolean[] roundVotes; //array that stores votes in one round
+    char[] history = new char[5]; //array that stores info about which group (spies/resistance) scored the round
     int captainIndex = 0, currentRound = 0, captainSwitches = 0; //captain switches is the count of how many times captain switched (5 times and spies win the round)
-    int[] roundsDistribution = new int[5];
+    int[] roundsDistribution = new int[5]; //array containing info about how many players go to each round
 
     public GameEngine(@NonNull ArrayList<String> list) {
         this.players = list;
