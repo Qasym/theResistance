@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @SuppressLint({"SetTextI18n", "DefaultLocale"})
 public class TeamFormation extends AppCompatActivity {
@@ -125,38 +126,35 @@ public class TeamFormation extends AppCompatActivity {
     private void roundHistorySetup() {
         TextView roundTextView = null;
         for (int i = 0; i < gameEngine.history.length; i++) {
-            switch (i) {
-                case 0:
-                    roundTextView = findViewById(R.id.round_one);
-                    break;
-                case 1:
-                    roundTextView = findViewById(R.id.round_two);
-                    break;
-                case 2:
-                    roundTextView = findViewById(R.id.round_three);
-                    break;
-                case 3:
-                    roundTextView = findViewById(R.id.round_four);
-                    break;
-                case 4:
-                    roundTextView = findViewById(R.id.round_five);
-                    break;
-                default:
-                    break;
+            //choosing roundTextView
+            if (i == 0) {
+                roundTextView = findViewById(R.id.round_one);
             }
-            switch (gameEngine.history[i]) {
-                case 's':
-                    roundTextView.setText(String.format("Round %d\nSpies", i + 1));
-                    break;
-                case 'r':
-                    roundTextView.setText(String.format("Round %d\nResistance", i + 1));
-                    break;
-                default:
-                    roundTextView.setText(String.format("Round %d", i + 1));
-                    break;
+            else if (i == 1) {
+                roundTextView = findViewById(R.id.round_two);
             }
+            else if (i == 2) {
+                roundTextView = findViewById(R.id.round_three);
+            }
+            else if (i == 3) {
+                roundTextView = findViewById(R.id.round_four);
+            }
+            else if (i == 4) {
+                roundTextView = findViewById(R.id.round_five);
+            }
+            //setting up a history
+            if (gameEngine.history[i] < 0) {
+                roundTextView.setText(String.format("Round %d\nSpies", i + 1));
+            }
+            else if (gameEngine.history[i] > 0) {
+                roundTextView.setText(String.format("Round %d\nResistance", i + 1));
+            }
+            else {
+                roundTextView.setText(String.format("Round %d", i + 1));
+            }
+
             if (gameEngine.getCurrentRound() == i) {
-                roundTextView.setText(String.format("Round %d\nCurrent", i));
+                roundTextView.setText(String.format("Round %d\nCurrent", i + 1));
             }
         }
     }

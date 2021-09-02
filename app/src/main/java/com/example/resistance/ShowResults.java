@@ -97,6 +97,7 @@ public class ShowResults extends AppCompatActivity {
             @Override
             public void onFinish() {
                 makeScreenWhite();
+                gameEngine.nextRound();
                 Intent intent = new Intent(ShowResults.this, TeamFormation.class);
                 intent.putExtra("gameEngine", gameEngine);
                 startActivity(intent);

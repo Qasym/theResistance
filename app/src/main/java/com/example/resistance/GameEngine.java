@@ -12,7 +12,7 @@ public class GameEngine implements Serializable {
     final ArrayList<String> players, spies, resistance, captainList;
     ArrayList<String> roundGoers; //list containing players who about to vote
     boolean[] roundVotes; //array that stores votes in one round
-    char[] history = new char[5]; //array that stores info about which group (spies/resistance) scored the round
+    byte[] history = new byte[5]; //array that stores info about which group (spies/resistance) scored the round
     int captainIndex = 0, currentRound = 0, captainSwitches = 0; //captain switches is the count of how many times captain switched (5 times and spies win the round)
     int[] roundsDistribution = new int[5]; //array containing info about how many players go to each round
 
@@ -22,7 +22,9 @@ public class GameEngine implements Serializable {
         this.resistance = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
-            history[i] = 'n'; //stands for none (or no one), indicating that no one won the round yet
+            history[i] = 0; //stands for null (or no one), indicating that no one won the round yet
+            //positive byte means resistance won the round
+            //negative byte means spies won the round
         }
 
         setRoles();
@@ -100,18 +102,18 @@ public class GameEngine implements Serializable {
 
     public boolean anyWinner() {
         int r = 0, s = 0; //resistance, spies
-        for (char c : history) {
-            if (c == 'r') r++;
-            else if (c == 's') s++;
+        for (byte c : history) {
+            if (c > 0) r++;
+            else if (c < 0) s++;
         }
         return r >= 3 || s >= 3;
     }
 
     public String whoWon() {
         int r = 0, s = 0; //resistance, spies
-        for (char c : history) {
-            if (c == 'r') r++;
-            else if (c == 's') s++;
+        for (byte c : history) {
+            if (c > 0) r++;
+            else if (c < 0) s++;
         }
         if (r >= 3) return "Spies";
         else return "Resistance";
@@ -206,10 +208,10 @@ public class GameEngine implements Serializable {
     }
 
     private void spiesWonTheRound() {
-        history[currentRound] = 's'; //indicates that spies won the round
+        history[currentRound] = -1; //indicates that spies won the round
     }
 
     private void resistanceWonTheRound() {
-        history[currentRound] = 'r'; //indicates that resistance won the round
+        history[currentRound] = 1; //indicates that resistance won the round
     }
 }

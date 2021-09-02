@@ -42,7 +42,6 @@ public class TeamConfirmation extends AppCompatActivity {
     * This method switches to next activity
     * */
     public void agreeButtonClick(View view) {
-        gameEngine.nextRound(); //updating the round
         gameEngine.resetSwitches(); //resetting captainSwitches to zero
         gameEngine.setRoundGoers(roundGoers);
         Intent intent = new Intent(this, VotePhase.class);
