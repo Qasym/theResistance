@@ -18,6 +18,7 @@ public class Final extends AppCompatActivity {
 
         TextView finalWords = findViewById(R.id.final_words);
         finalWords.setText(String.format("%s won the game", gameEngine.whoWon()));
+        //todo: spies win even if resistance wins; fix
     }
 
     public void finish_button(View view) {

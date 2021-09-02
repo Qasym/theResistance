@@ -115,8 +115,8 @@ public class GameEngine implements Serializable {
             if (c > 0) r++;
             else if (c < 0) s++;
         }
-        if (r >= 3) return "Spies";
-        else return "Resistance";
+        if (r >= 3) return "Resistance";
+        else return "Spies";
     }
 
     /*
@@ -169,11 +169,15 @@ public class GameEngine implements Serializable {
         return spies;
     }
 
+    //todo:implement isStarRound() method
+    //if it is a star round, then we need to display appropriate message
+
     public void captainSwitched() {
         if (captainSwitches == 5) {
             //round is after spies;
-            history[getCurrentRound()] = 's';
+            history[getCurrentRound()] = -1;
             nextRound();
+            //todo: implement notification of the winner of the round
         }
         else captainSwitches++;
     }
