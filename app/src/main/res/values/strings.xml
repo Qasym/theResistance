@@ -1,15 +1,61 @@
 <resources>
     <string name="app_name">Resistance</string>
-    <string name="rules_of_the_game">These are the rules of the game
-    I just need to type something here. Let\'s use lorem ipsum
-    Lorem Ipsum is simply dummy text of the printing and
-        typesetting industry. Lorem Ipsum has been the
-        industry\'s standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled
-        it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the
-        1960s with the release of Letraset sheets containing Lorem
-        Ipsum passages, and more recently with desktop publishing
-        software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="rules_of_the_game">
+    Set in the near future, The Resistance pits a small group of 
+    resistance fighters against a powerful and corrupt government.
+    The resistance has launched a series of bold and daring missions 
+    to bring the government to its knees. Unfortunately spies have 
+    infiltrated the resistance ranks, ready to sabotage the carefully
+    crafted plans. Even a single spy can take down a resistance
+    mission team, choose your teams carefully or forever lose your 
+    chance for freedom.\n
+
+    \nThe Resistance is a game where players attempt to find out one
+    another\'s identities, it is a game of social deduction and deception.\n
+
+    \nThe game requires between five and ten players. In the game you are
+    assigned 1 of 2 roles, a spy or a member of the resistance.
+    Your role will be assigned when you and your friends press the 
+    play button. Simply pass the phone accordingly, and be careful
+    so that nobody sees your role.\n
+
+    \nThe Spies are made aware of each others roles without the Resistance
+    members knowing. This is done when a spy receives the phone, he can 
+    see the list of all other spies.\n
+
+    \nThe game consists of up to five missions. You can see the table of
+    5 rounds during the team formation.\n
+
+    \nAbout the team formation. Each mission has a leader. The leader
+    proposes a mission team of a certain size, which the group approves
+    by public vote.\n
+
+    \nIf the group does not approve the mission by a simple majority,
+    leadership passes to the next player.\n
+
+    \nIf the leadership is changed more than 5 times, mission will be
+    considered as failed, and it counts for the spies. 
+    So be careful on the 5th switch of the captain.\n
+
+    \nOnce a mission team formed, they vote whether the mission succeeds(passes)
+    or fails.\n
+
+    \nIf there are 6 or less players, it only takes one spy on a mission
+    team to fail the mission. If multiple fails are carried out, only 
+    one is counted. If three missions are successful, the Resistance wins.
+    If three missions are failed, the spies win.\n
+
+    \nIf there are 7 or more players, mission 4 will require 2 fails from
+    spies to win the round. It is marked with a star * in the table.\n
+
+    \nAfter a mission is completed, you can view its summary as a blinking
+    blue or red colors. 1 blue indicates 1 players passing the mission, 
+    1 red indicates that 1 spy failed the mission. That way you will able 
+    to know number of passes and number of fails.\n
+
+    \nAnd finally, the last, but most important rule of all:
+    You are allowed to say anything, to anyone, at any time
+    as long as it is said publicly.\n
+
+    </string>
 </resources>

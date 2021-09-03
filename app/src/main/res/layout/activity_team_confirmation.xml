@@ -16,9 +16,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintVertical_bias="0.1"
         android:textColor="@color/black"
-        android:text="Captain is Player1\nRound 1 goers are:"/>
+        android:text="Captain is Player1\nRound 1 goers are:"
+        tools:ignore="HardcodedText" />
 
     <TextView
+        android:id="@+id/everyone_agrees"
         android:text="Everyone agrees?"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
@@ -27,7 +29,8 @@
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/agree_button"/>
+        app:layout_constraintBottom_toTopOf="@+id/agree_button"
+        tools:ignore="HardcodedText" />
 
     <ListView
         android:id="@+id/selected_players"
@@ -51,7 +54,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.75"
         app:layout_constraintHorizontal_bias="0.25"
-        android:onClick="agreeButtonClick"/>
+        android:onClick="agreeButtonClick"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/disagree_button"
@@ -64,6 +68,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.75"
         app:layout_constraintHorizontal_bias="0.75"
-        android:onClick="disagreeButtonClick"/>
+        android:onClick="disagreeButtonClick"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

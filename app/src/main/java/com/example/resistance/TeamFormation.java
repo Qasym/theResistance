@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @SuppressLint({"SetTextI18n", "DefaultLocale"})
 public class TeamFormation extends AppCompatActivity {
@@ -144,17 +144,23 @@ public class TeamFormation extends AppCompatActivity {
             }
             //setting up a history
             if (gameEngine.history[i] < 0) {
-                roundTextView.setText(String.format("Round %d\nSpies", i + 1));
+                if (gameEngine.isStarRound(i)) roundTextView.setText(String.format("Round %d*\nSpies", i + 1));
+                else roundTextView.setText(String.format("Round %d\nSpies", i + 1));
+                roundTextView.setBackgroundColor(Color.RED);
             }
             else if (gameEngine.history[i] > 0) {
-                roundTextView.setText(String.format("Round %d\nResistance", i + 1));
+                if (gameEngine.isStarRound(i)) roundTextView.setText(String.format("Round %d*\nResistance", i + 1));
+                else roundTextView.setText(String.format("Round %d\nResistance", i + 1));
+                roundTextView.setBackgroundColor(Color.BLUE);
             }
             else {
-                roundTextView.setText(String.format("Round %d", i + 1));
+                if (gameEngine.isStarRound(i)) roundTextView.setText(String.format("Round %d*", i + 1));
+                else roundTextView.setText(String.format("Round %d", i + 1));
             }
 
             if (gameEngine.getCurrentRound() == i) {
-                roundTextView.setText(String.format("Round %d\nCurrent", i + 1));
+                if (gameEngine.isStarRound(i)) roundTextView.setText(String.format("Round %d*\nCurrent", i + 1));
+                else roundTextView.setText(String.format("Round %d\nCurrent", i + 1));
             }
         }
     }

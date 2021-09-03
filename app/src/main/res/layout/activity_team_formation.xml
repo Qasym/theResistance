@@ -42,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Team for the round"
+        tools:ignore="HardcodedText"
         app:layout_constraintLeft_toRightOf="@+id/verticalGuideline"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/selected_players"
@@ -54,6 +55,7 @@
         android:layout_height="wrap_content"
         android:onClick="proposeButtonClick"
         android:text="Propose"
+        tools:ignore="HardcodedText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -84,9 +86,10 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="Round 1"
+            tools:ignore="HardcodedText"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:backgroundTint="#FFFFFF" />
+            android:background="#FFFFFF" />
 
         <TextView
             android:id="@+id/round_two"
@@ -94,9 +97,10 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="Round 2"
+            tools:ignore="HardcodedText"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:backgroundTint="#FFFFFF" />
+            android:background="#FFFFFF" />
 
         <TextView
             android:id="@+id/round_three"
@@ -104,9 +108,10 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="Round 3"
+            tools:ignore="HardcodedText"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:backgroundTint="#FFFFFF" />
+            android:background="#FFFFFF" />
 
         <TextView
             android:id="@+id/round_four"
@@ -114,9 +119,10 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="Round 4"
+            tools:ignore="HardcodedText"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:backgroundTint="#FFFFFF" />
+            android:background="#FFFFFF" />
 
         <TextView
             android:id="@+id/round_five"
@@ -124,9 +130,10 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="Round 5"
+            tools:ignore="HardcodedText"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:backgroundTint="#FFFFFF" />
+            android:background="#FFFFFF" />
 
     </LinearLayout>
 

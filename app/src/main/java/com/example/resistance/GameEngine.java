@@ -169,17 +169,30 @@ public class GameEngine implements Serializable {
         return spies;
     }
 
-    //todo:implement isStarRound() method
-    //if it is a star round, then we need to display appropriate message
+    /*
+    * Returns true if the the round is star round
+    * meaning that it requires two fails for spies to win
+    * */
+    public boolean isStarRound(int round) {
+        return round == 3 && players.size() >= 7;
+    }
 
-    public void captainSwitched() {
+    /*
+    * This method returns true if round fails due to excessive switches
+    * returns false otherwise
+    * */
+    public boolean captainSwitched() {
         if (captainSwitches == 5) {
             //round is after spies;
             history[getCurrentRound()] = -1;
             nextRound();
-            //todo: implement notification of the winner of the round
+            return true;
         }
-        else captainSwitches++;
+        else {
+            captainSwitches++;
+            return false;
+        }
+
     }
 
     public void resetSwitches() {
@@ -189,6 +202,7 @@ public class GameEngine implements Serializable {
     /*
     * Calculates who won the round
     * based on votes
+    * Updates the history
     * */
     public int calculateResult() {
         int fails = 0;
@@ -199,7 +213,7 @@ public class GameEngine implements Serializable {
         if (fails == 0) resistanceWonTheRound();
         else {
             if (players.size() >= 7) {
-                if (currentRound == 4) {
+                if (currentRound == 3) { //actually star round is round 4, but we are using 0-indexing here
                     if (fails >= 2) spiesWonTheRound();
                     else resistanceWonTheRound();
                 }

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -24,6 +26,8 @@ public class DisplayRules extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true); // This shows "back-button" in the toolbar
         //////////////////////////////////////////////////////////////////////////
+
+        ((TextView) findViewById(R.id.rules)).setMovementMethod(new ScrollingMovementMethod());
     }
 
     /*
